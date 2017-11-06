@@ -11,8 +11,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.zbk.fastec.MainActivity">
 
-    <TextView
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:text="{fa_check}"
+        tools:ignore="HardcodedText"/>
+
 </RelativeLayout>

@@ -4,6 +4,7 @@ import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
@@ -13,7 +14,7 @@ import java.util.WeakHashMap;
 
 public class Configurator {
   //WeakHashMap键值对在不使用的时候会回收,存储大量数据时试用
-  private static final WeakHashMap<String, Object> LATTE_CONFIGS = new WeakHashMap<>();
+  private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
 
   //用来存储图标
   private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
@@ -28,7 +29,7 @@ public class Configurator {
     return Holder.INSTANCE;
   }
 
-  final WeakHashMap<String, Object> getLatteConfigs() {
+  final HashMap<String, Object> getLatteConfigs() {
     return LATTE_CONFIGS;
   }
 
@@ -41,7 +42,7 @@ public class Configurator {
    *  配置完成
    */
   public final void configure() {
-
+    initIcons();
     LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
   }
 
@@ -62,6 +63,13 @@ public class Configurator {
       throw  new RuntimeException("Configuration is not ready ,call configure!!");
     }
   }
+
+  /**
+   * 获取配置
+   * @param key
+   * @param <T>
+   * @return
+   */
   @SuppressWarnings("unchecked")
   final <T> T getConfiguration(Enum<ConfigType> key){
     checkConfiguration();
