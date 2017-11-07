@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     textView = (IconTextView) findViewById(R.id.icon);
-    textView.setText("\uF000");
+//    textView.setText("\uF000");
     Toast.makeText(Latte.getApplication(),"穿入context",Toast.LENGTH_LONG).show();
   }
 }
