@@ -10,6 +10,7 @@ import java.util.WeakHashMap;
 
 /**
  * Created by ZBK on 2017-10-30.
+ * Description: 配置类,保存配置信息
  */
 
 public class Configurator {

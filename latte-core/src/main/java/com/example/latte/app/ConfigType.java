@@ -2,6 +2,7 @@ package com.example.latte.app;
 
 /**
  * Created by ZBK on 2017-10-31.
+ * Description: 配置文件 key
  */
 
 public enum ConfigType {

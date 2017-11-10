@@ -7,6 +7,7 @@ import java.util.WeakHashMap;
 
 /**
  * Created by ZBK on 2017-10-30.
+ * Description:对外的设置类
  */
 
 public final class Latte {
