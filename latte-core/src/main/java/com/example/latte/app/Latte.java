@@ -22,15 +22,15 @@ public final class Latte {
    */
   public static Configurator init(Context context) {
     //配置context
-    getConfigurator().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
+    getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
     return Configurator.getInstance();
   }
 
-  private static HashMap<String, Object> getConfigurator() {
+  public static HashMap<String, Object> getConfigurations() {
     return Configurator.getInstance().getLatteConfigs();
   }
   public static  Context getApplication(){
-    return (Context) getConfigurator().get(ConfigType.APPLICATION_CONTEXT.name());
+    return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
   }
 
 
