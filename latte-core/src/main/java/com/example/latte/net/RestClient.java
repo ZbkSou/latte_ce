@@ -8,6 +8,7 @@ import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
 
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import okhttp3.RequestBody;
 
@@ -19,27 +20,34 @@ import okhttp3.RequestBody;
 public class RestClient {
 
     private final String URL;
-    private final Map<String, Object> PARAMS;
+    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private final IRequest REQUEST;
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
+    private final IError ERROR;
     private final RequestBody BODY;
 
-    public RestClient(String URL,
-                      Map<String, Object> PARAMS,
-                      IRequest REQUEST,
-                      ISuccess SUCCESS,
-                      IFailure FAILURE,
-                      IError ERROR,
-                      RequestBody BODY) {
-        this.BODY = BODY;
-        this.FAILURE = FAILURE;
-        this.PARAMS = PARAMS;
-        this.REQUEST = REQUEST;
-        this.URL = URL;
-        this.SUCCESS = SUCCESS;
+    public RestClient(String url,
+                      Map<String, Object> params,
+                      IRequest request,
+                      ISuccess success,
+                      IFailure failure,
+                      IError error,
+                      RequestBody body) {
+        this.BODY = body;
+        this.FAILURE = failure;
+        PARAMS.putAll(params);
+        this.REQUEST = request;
+        this.URL = url;
+        this.ERROR = error;
+        this.SUCCESS = success;
     }
 
+    /**
+     * 用来构造RestClient
+     *
+     * @return
+     */
     public static RestClientBuilder builder() {
         return new RestClientBuilder();
     }

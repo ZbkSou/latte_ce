@@ -13,54 +13,85 @@ import okhttp3.RequestBody;
 
 /**
  * Created by ZBK on 2017-11-19.
+ * RestClient的建造者
+ * RestClient.builder()
+ * .url("")
+ * .params("","")
+ * .success(new ISuccess() {
+ *
+ * @Override public void onSuccess(String response) {
+ * <p>
+ * }
+ * })
+ * .failure(new IFailure() {
+ * @Override public void onFailure() {
+ * <p>
+ * }
+ * })
+ * .error(new IError() {
+ * @Override public void onError(int code, String msg) {
+ * <p>
+ * }
+ * })
+ * .build();
  */
 
 public class RestClientBuilder {
-    private  String mUrl;
-    private Map<String, Object> mParams;
+    private String mUrl;
+    private static final Map<String, Object> PARAMS = RestCreator.getParams();
     private IRequest mIRequest;
     private ISuccess mISuccess;
     private IFailure mIFailure;
     private IError mIError;
     private RequestBody mBody;
-    RestClientBuilder(){
+
+    RestClientBuilder() {
 
     }
-    public final RestClientBuilder url(String url){
+
+    public final RestClientBuilder url(String url) {
         this.mUrl = url;
         return this;
     }
-    public final RestClientBuilder params(Map<String ,Object>map){
-        this.mParams = map;
+
+    public final RestClientBuilder params(WeakHashMap<String, Object> map) {
+        PARAMS.putAll(map);
         return this;
     }
-    public final RestClientBuilder params(String key,Object value){
-        if(mParams == null){
-            mParams = new WeakHashMap<>();
-        }
-        this.mParams.put(key,value);
+
+    public final RestClientBuilder params(String key, Object value) {
+
+        this.PARAMS.put(key, value);
         return this;
     }
 
     /**
      * 穿入原始数据
+     *
      * @param raw
      * @return
      */
-    public final RestClientBuilder raw(String raw){
-      this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),raw);
+    public final RestClientBuilder raw(String raw) {
+        this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
         return this;
     }
-    public final RestClientBuilder success(ISuccess iSuccess ){
+
+    public final RestClientBuilder success(ISuccess iSuccess) {
         this.mISuccess = iSuccess;
         return this;
     }
-    public final RestClientBuilder failure(IFailure iFailure){
+
+    public final RestClientBuilder failure(IFailure iFailure) {
         this.mIFailure = iFailure;
         return this;
     }
-    public final RestClientBuilder error(IError iError ){
+
+    public final RestClientBuilder error(IError iError) {
         this.mIError = iError;
         return this;
+    }
+
+    public final RestClient build() {
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody);
     }
 }

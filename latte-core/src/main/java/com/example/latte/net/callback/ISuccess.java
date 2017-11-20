@@ -6,5 +6,5 @@ package com.example.latte.net.callback;
  */
 
 public interface ISuccess {
-    void onSuccess();
+    void onSuccess(String response);
 }
