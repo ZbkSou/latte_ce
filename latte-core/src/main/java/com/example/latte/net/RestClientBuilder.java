@@ -33,7 +33,8 @@ import okhttp3.RequestBody;
  * <p>
  * }
  * })
- * .build();
+ * .build()
+ * .get/post/put/detele
  */
 
 public class RestClientBuilder {

@@ -10,7 +10,7 @@ import java.util.WeakHashMap;
 
 /**
  * Created by ZBK on 2017-10-30.
- * Description: 配置类,保存配置信息
+ * Description: 配置类,保存配置信息,通过Latter 调用
  */
 
 public class Configurator {
@@ -47,13 +47,7 @@ public class Configurator {
     LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
   }
 
-  /**
-   *   配置host
-   */
-  public final  Configurator withApiHost(String host){
-    LATTE_CONFIGS.put(ConfigType.API_HOST.name(),host);
-    return this;
-  }
+
 
   /**
    * 检查配置完成,未完成报错
@@ -67,6 +61,7 @@ public class Configurator {
 
   /**
    * 获取配置
+   * 配置前检查配置是否完成
    * @param key
    * @param <T>
    * @return
@@ -79,6 +74,7 @@ public class Configurator {
 
   /**
    * 初始化图标
+   * 用来在配置完成时调用初始化所有 icon
    */
   private void initIcons(){
     if(ICONS.size()>0){
@@ -88,10 +84,23 @@ public class Configurator {
       }
     }
   }
+
+  /**
+   * 配置 icon
+   * @param descriptor
+   * @return
+   */
   public final Configurator withIcon(IconFontDescriptor descriptor){
     ICONS.add(descriptor);
     return this;
   }
 
+  /**
+   *   配置host
+   */
+  public final  Configurator withApiHost(String host){
+    LATTE_CONFIGS.put(ConfigType.API_HOST.name(),host);
+    return this;
+  }
 
 }

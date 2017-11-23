@@ -2,6 +2,7 @@ package com.example.latte.net;
 
 /**
  * Created by ZBK on 2017-11-19.
+ * 请求方法
  */
 
 public enum HttpMethod {

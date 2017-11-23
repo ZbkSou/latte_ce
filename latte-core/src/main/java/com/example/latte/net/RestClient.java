@@ -6,11 +6,16 @@ import com.example.latte.net.callback.IError;
 import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
+import com.example.latte.net.callback.RequsetCallbacks;
 
 import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+
+import static com.example.latte.net.HttpMethod.GET;
 
 /**
  * User: bkzhou
@@ -53,4 +58,72 @@ public class RestClient {
     }
 
 
+    private void request(HttpMethod method){
+        final RestService service = RestCreator.getRestService();
+        Call<String> call = null;
+        if(REQUEST!=null){
+            REQUEST.onRequestSrart();
+        }
+        switch (method){
+            case GET:
+                call = service.get(URL,PARAMS);
+                break;
+            case POST:
+                call = service.post(URL,PARAMS);
+                break;
+            case PUT:
+                call = service.put(URL,PARAMS);
+                break;
+            case DELETE:
+                call = service.delete(URL,PARAMS);
+                break;
+            default:
+                break;
+        }
+        //执行 call
+        if(call!=null){
+            call.enqueue(getRequestCallback());
+        }
+
+    }
+
+    /**
+     * 构造回调
+     * @return
+     */
+    private Callback<String> getRequestCallback(){
+        return new RequsetCallbacks(REQUEST,SUCCESS,FAILURE,ERROR);
+    }
+
+    /**
+     * get 请求
+     * 具体使用方式
+     */
+    public final void get(){
+        request(HttpMethod.GET);
+    }
+
+    /**
+     * post请求
+     */
+    public final void post(){
+        request(HttpMethod.POST);
+    }
+
+    /**
+     * put 请求
+     */
+    public final void put(){
+        request(HttpMethod.PUT);
+    }
+
+    /**
+     * delete 请求
+     */
+    public final void delete(){
+        request(HttpMethod.DELETE);
+    }
+
+
 }
+

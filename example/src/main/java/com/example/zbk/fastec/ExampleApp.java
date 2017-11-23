@@ -16,7 +16,7 @@ public class ExampleApp extends Application {
     super.onCreate();
     //配置core
     Latte.init(this)
-      .withApiHost("http:")
+      .withApiHost("https://news-at.zhihu.com")
 //      加入字体图标
       .withIcon(new FontAwesomeModule())
       .withIcon(new FontEcModule())

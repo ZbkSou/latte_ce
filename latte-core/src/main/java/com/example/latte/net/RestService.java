@@ -20,7 +20,7 @@ import retrofit2.http.Url;
 /**
  * User: bkzhou
  * Date: 2017/11/16
- * Description:
+ * Description:retrofit2请求中的 service
  */
 public interface RestService {
     @GET
