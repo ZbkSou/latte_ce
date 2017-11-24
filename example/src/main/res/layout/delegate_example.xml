@@ -8,4 +8,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="1222222"/>
+  <com.joanzapata.iconify.widget.IconTextView
+    android:id="@+id/iconTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true"
+    android:text="{icon-fenxiang}"
+    android:textSize="20sp"
+    android:textColor="@android:color/black"/>
 </LinearLayout>

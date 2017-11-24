@@ -1,9 +1,13 @@
 package com.example.latte.net;
 
+import android.content.Context;
+
 import com.example.latte.net.callback.IError;
 import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
+import com.example.latte.ui.LatteLoader;
+import com.example.latte.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -45,6 +49,8 @@ public class RestClientBuilder {
     private IFailure mIFailure;
     private IError mIError;
     private RequestBody mBody;
+    private Context mContext;
+    private LoaderStyle mLoaderStyle;
 
     RestClientBuilder() {
 
@@ -55,19 +61,29 @@ public class RestClientBuilder {
         return this;
     }
 
+    /**
+     * 设置参数
+     * @param map
+     * @return
+     */
     public final RestClientBuilder params(WeakHashMap<String, Object> map) {
         PARAMS.putAll(map);
         return this;
     }
 
+    /**
+     * 设置参数
+     * @param key
+     * @param value
+     * @return
+     */
     public final RestClientBuilder params(String key, Object value) {
-
         this.PARAMS.put(key, value);
         return this;
     }
 
     /**
-     * 穿入原始数据
+     * 穿入初始数据 bady
      *
      * @param raw
      * @return
@@ -77,22 +93,45 @@ public class RestClientBuilder {
         return this;
     }
 
+    /**
+     * 成功回调
+     * @param iSuccess
+     * @return
+     */
     public final RestClientBuilder success(ISuccess iSuccess) {
         this.mISuccess = iSuccess;
         return this;
     }
 
+    /**
+     * 设置请求识别回调
+     * @param iFailure
+     * @return
+     */
     public final RestClientBuilder failure(IFailure iFailure) {
         this.mIFailure = iFailure;
         return this;
     }
 
-    public final RestClientBuilder error(IError iError) {
-        this.mIError = iError;
+    /**
+     * 设置 load
+     * @param context
+     * @param style
+     * @return
+     */
+    public final RestClientBuilder load(Context  context,LoaderStyle style) {
+        this.mContext = context;
+        this.mLoaderStyle = style;
+        return this;
+    }
+    public final RestClientBuilder load(Context  context) {
+        this.mContext = context;
+        this.mLoaderStyle = LoaderStyle.BallSpinFadeLoaderIndicator;
         return this;
     }
 
+
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody);
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody,mContext,mLoaderStyle);
     }
 }

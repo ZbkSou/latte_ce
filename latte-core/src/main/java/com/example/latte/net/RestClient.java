@@ -1,5 +1,6 @@
 package com.example.latte.net;
 
+import android.content.Context;
 import android.test.mock.MockApplication;
 
 import com.example.latte.net.callback.IError;
@@ -7,6 +8,7 @@ import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.net.callback.RequsetCallbacks;
+import com.example.latte.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -31,6 +33,8 @@ public class RestClient {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
+    private LoaderStyle LOADER_STYLE;
+    private Context CONTEXT;
 
     public RestClient(String url,
                       Map<String, Object> params,
@@ -38,7 +42,9 @@ public class RestClient {
                       ISuccess success,
                       IFailure failure,
                       IError error,
-                      RequestBody body) {
+                      RequestBody body,
+                      Context context,
+                      LoaderStyle loaderStyle) {
         this.BODY = body;
         this.FAILURE = failure;
         PARAMS.putAll(params);
@@ -46,6 +52,8 @@ public class RestClient {
         this.URL = url;
         this.ERROR = error;
         this.SUCCESS = success;
+        this.CONTEXT = context;
+        this.LOADER_STYLE = loaderStyle;
     }
 
     /**
@@ -58,7 +66,11 @@ public class RestClient {
     }
 
 
+    /**
+     * 构造请求
+     */
     private void request(HttpMethod method){
+
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;
         if(REQUEST!=null){
