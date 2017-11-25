@@ -37,7 +37,7 @@ public class RestCreator {
   }
 
   /**
-   * okhttp
+   * okhttp完成上传下载功能
    */
   private static final  class OKHttpHolder{
     private  static  final int TIME_OUT=60;
