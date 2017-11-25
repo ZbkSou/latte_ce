@@ -6,6 +6,13 @@ package com.example.latte.net.callback;
  */
 
 public interface IRequest {
+    /**
+     * 网络请求开始前
+     */
     void onRequestSrart();
+
+    /**
+     * 网络请求结束
+     */
     void onRequestEnd();
 }

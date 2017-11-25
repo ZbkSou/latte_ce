@@ -20,10 +20,8 @@ public final class Latte {
 
     /**
      * Latte.init(this)
-     * .withApiHost("http:")
-     * .configure();
-     * 可以这样继续配置
      *
+     * 初始化主要保存ApplicationContext
      * @param context
      * @return
      */
@@ -33,10 +31,18 @@ public final class Latte {
         return Configurator.getInstance();
     }
 
+    /**
+     * 获取配置
+     * @return
+     */
     public static HashMap<String, Object> getConfigurations() {
         return Configurator.getInstance().getLatteConfigs();
     }
 
+    /**
+     * 直接获取ApplicationContext其他配置需要通过getConfigurations
+     * @return
+     */
     public static Context getApplication() {
         return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
     }

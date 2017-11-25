@@ -32,52 +32,54 @@ public class ExampleDelegate extends LatteDelegate {
 
     private void testRestClient() {
         RestClient.builder()
-            .url("https://api.douban.com/v2/book/1220562")
+          .url("https://api.douban.com/v2/book/1220562")
 //            .params("", "")
-            .success(new ISuccess() {
-                @Override
-                public void onSuccess(String response) {
-                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
-                }
-            })
-            .failure(new IFailure() {
-                @Override
-                public void onFailure() {
 
-                }
-            })
-            .error(new IError() {
-                @Override
-                public void onError(int code, String msg) {
+          .loader(getContext())
+          .success(new ISuccess() {
+              @Override
+              public void onSuccess(String response) {
+                  Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+              }
+          })
+          .failure(new IFailure() {
+              @Override
+              public void onFailure() {
 
-                }
-            })
-            .build()
-            .get();
+              }
+          })
+          .error(new IError() {
+              @Override
+              public void onError(int code, String msg) {
+
+              }
+          })
+          .build()
+          .get();
 
         RestClient.builder()
-            .url("/api/4/version/android/2.3.0")
+          .url("/api/4/version/android/2.3.0")
 //            .params("", "")
-            .success(new ISuccess() {
-                @Override
-                public void onSuccess(String response) {
-                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
-                }
-            })
-            .failure(new IFailure() {
-                @Override
-                public void onFailure() {
+          .success(new ISuccess() {
+              @Override
+              public void onSuccess(String response) {
+                  Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+              }
+          })
+          .failure(new IFailure() {
+              @Override
+              public void onFailure() {
 
-                }
-            })
-            .error(new IError() {
-                @Override
-                public void onError(int code, String msg) {
+              }
+          })
+          .error(new IError() {
+              @Override
+              public void onError(int code, String msg) {
 
-                }
-            })
-            .build()
-            .get();
+              }
+          })
+          .build()
+          .get();
     }
 
 }

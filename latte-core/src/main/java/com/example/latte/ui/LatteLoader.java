@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
-
+import com.wang.avi.AVLoadingIndicatorView;
 import com.example.latte.R;
 import com.example.latte.util.DimenUtil;
-import com.wang.avi.AVLoadingIndicatorView;
+
 
 import java.util.ArrayList;
+
 
 /**
  * User: bkzhou
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * Description: Load 控制类
  */
 public class LatteLoader {
-    //loading 宽高比
+    //loading 高缩放比
     private static final int LOADER_SIZE_SCALE = 8;
     //loading 位置偏移
     private static final int LOADER_OFFSET_SCALE = 10;
@@ -27,10 +28,19 @@ public class LatteLoader {
     private static final ArrayList<AppCompatDialog> LOADERS = new ArrayList<>();
 
     //设置默认 load
-    private static  final  String DEFAULT_LOADER = LoaderStyle.BallSpinFadeLoaderIndicator.name();
+    private static final String DEFAULT_LOADER = LoaderStyle.BallSpinFadeLoaderIndicator.name();
 
     /**
-     * 显示 load
+     * 根据枚举显示
+     * @param context
+     * @param type
+     */
+    public static void showLoading(Context context,Enum<LoaderStyle> type){
+        showLoading(context,type.name());
+    }
+    /**
+     * 根据string显示 load
+     *
      * @param context
      * @param type
      */
@@ -56,25 +66,25 @@ public class LatteLoader {
 
     /**
      * 显示默认 loading
+     *
      * @param context
      */
-    public static void showLoading(Context context){
-        showLoading(context,DEFAULT_LOADER);
+    public static void showLoading(Context context) {
+        showLoading(context, DEFAULT_LOADER);
     }
 
     /**
      * 关闭所有 laod
      */
-    public static void stopLoading(){
-        for(AppCompatDialog dialog:LOADERS){
-            if(dialog!=null){
-                if(dialog.isShowing()){
+    public static void stopLoading() {
+        for (AppCompatDialog dialog : LOADERS) {
+            if (dialog != null) {
+                if (dialog.isShowing()) {
                     dialog.cancel();
                 }
             }
         }
     }
-
 
 
 }

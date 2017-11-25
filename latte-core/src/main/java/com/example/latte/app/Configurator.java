@@ -17,7 +17,7 @@ public class Configurator {
   //WeakHashMap键值对在不使用的时候会回收,存储大量数据时试用
   private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
 
-  //用来存储图标
+  //用来存储字体图标
   private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
   private Configurator() {
@@ -43,6 +43,7 @@ public class Configurator {
    *  配置完成
    */
   public final void configure() {
+    //统一初始化图标
     initIcons();
     LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
   }

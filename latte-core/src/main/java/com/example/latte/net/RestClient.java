@@ -8,6 +8,7 @@ import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.net.callback.RequsetCallbacks;
+import com.example.latte.ui.LatteLoader;
 import com.example.latte.ui.LoaderStyle;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ import static com.example.latte.net.HttpMethod.GET;
 /**
  * User: bkzhou
  * Date: 2017/11/15
- * Description:
+ * Description:网络请求类，完成网络请i去方法
  */
 public class RestClient {
 
@@ -73,8 +74,12 @@ public class RestClient {
 
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;
+        //如果存在REQUEST调用onRequestSrart（不在refit请求中）
         if(REQUEST!=null){
             REQUEST.onRequestSrart();
+        }
+        if(LOADER_STYLE!=null){
+            LatteLoader.showLoading(CONTEXT,LOADER_STYLE);
         }
         switch (method){
             case GET:
@@ -104,7 +109,7 @@ public class RestClient {
      * @return
      */
     private Callback<String> getRequestCallback(){
-        return new RequsetCallbacks(REQUEST,SUCCESS,FAILURE,ERROR);
+        return new RequsetCallbacks(REQUEST,SUCCESS,FAILURE,ERROR,LOADER_STYLE);
     }
 
     /**

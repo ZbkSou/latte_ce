@@ -104,7 +104,7 @@ public class RestClientBuilder {
     }
 
     /**
-     * 设置请求识别回调
+     * 设置请求失败回调
      * @param iFailure
      * @return
      */
@@ -112,6 +112,26 @@ public class RestClientBuilder {
         this.mIFailure = iFailure;
         return this;
     }
+    /**
+     * 设置请求前后回调
+     * @param iRequest
+     * @return
+     */
+    public final RestClientBuilder onRequest(IRequest iRequest) {
+        this.mIRequest = iRequest;
+        return this;
+    }
+
+    /**
+     * 设置请求错误回调
+     * @param iError
+     * @return
+     */
+    public final RestClientBuilder error(IError iError) {
+        this.mIError = iError;
+        return this;
+    }
+
 
     /**
      * 设置 load
@@ -119,12 +139,18 @@ public class RestClientBuilder {
      * @param style
      * @return
      */
-    public final RestClientBuilder load(Context  context,LoaderStyle style) {
+    public final RestClientBuilder loader(Context  context,LoaderStyle style) {
         this.mContext = context;
         this.mLoaderStyle = style;
         return this;
     }
-    public final RestClientBuilder load(Context  context) {
+
+    /**
+     * 使用默认load
+     * @param context
+     * @return
+     */
+    public final RestClientBuilder loader(Context  context) {
         this.mContext = context;
         this.mLoaderStyle = LoaderStyle.BallSpinFadeLoaderIndicator;
         return this;
