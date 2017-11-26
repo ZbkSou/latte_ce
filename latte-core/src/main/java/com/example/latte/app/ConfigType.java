@@ -13,5 +13,7 @@ public enum ConfigType {
 //  初始化配置完成
   CONFIG_READY,
 // 字体初始化项目
-  ICON
+  ICON,
+  //拦截器
+  INTERCEPTOR
 }

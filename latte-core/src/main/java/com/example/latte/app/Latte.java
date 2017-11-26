@@ -38,6 +38,13 @@ public final class Latte {
     public static HashMap<String, Object> getConfigurations() {
         return Configurator.getInstance().getLatteConfigs();
     }
+    /**
+     * 获取配置
+     * @return
+     */
+    public static  Object getConfiguration(Enum e) {
+        return Configurator.getInstance().getLatteConfigs().get(e.name());
+    }
 
     /**
      * 直接获取ApplicationContext其他配置需要通过getConfigurations

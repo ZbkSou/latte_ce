@@ -32,7 +32,7 @@ public class ExampleDelegate extends LatteDelegate {
 
     private void testRestClient() {
         RestClient.builder()
-          .url("https://api.douban.com/v2/book/1220562")
+          .url("/index")
 //            .params("", "")
 
           .loader(getContext())

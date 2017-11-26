@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
+import okhttp3.Interceptor;
+
 /**
  * Created by ZBK on 2017-10-30.
  * Description: 配置类,保存配置信息,通过Latter 调用
@@ -16,9 +18,10 @@ import java.util.WeakHashMap;
 public class Configurator {
   //WeakHashMap键值对在不使用的时候会回收,存储大量数据时试用
   private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
-
   //用来存储字体图标
   private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+//配置连接器
+  private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
   private Configurator() {
     //踢出配置完成,即配置尚未完成
@@ -95,6 +98,28 @@ public class Configurator {
     ICONS.add(descriptor);
     return this;
   }
+
+  /**
+   * 配置拦截器
+   * @param interceptor
+   * @return
+     */
+  public final Configurator withInterceptor(Interceptor interceptor){
+    INTERCEPTORS.add(interceptor);
+    LATTE_CONFIGS.put(ConfigType.INTERCEPTOR.name(),INTERCEPTORS);
+    return this;
+  }
+  /**
+   * 配置拦截器
+   * @param interceptors
+   * @return
+   */
+  public final Configurator withInterceptor(ArrayList<Interceptor> interceptors){
+    INTERCEPTORS.addAll(interceptors);
+    LATTE_CONFIGS.put(ConfigType.INTERCEPTOR.name(),INTERCEPTORS);
+    return this;
+  }
+
 
   /**
    *   配置host
