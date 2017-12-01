@@ -146,6 +146,7 @@ public class RestClient {
         }
         //执行 call
         if (call != null) {
+            //异步请求
             call.enqueue(getRequestCallback());
         }
 
