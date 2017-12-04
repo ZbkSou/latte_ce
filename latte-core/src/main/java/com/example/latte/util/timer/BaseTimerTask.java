@@ -1,5 +1,6 @@
 package com.example.latte.util.timer;
 
+
 import java.util.TimerTask;
 
 /**
@@ -7,7 +8,7 @@ import java.util.TimerTask;
  * Date: 2017/12/1
  * Description:
  */
-public class BaseTimerTask extends TimerTask{
+public class BaseTimerTask extends TimerTask {
 
     private ITimerListener mITimerListener = null;
 
