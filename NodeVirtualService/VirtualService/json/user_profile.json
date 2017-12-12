@@ -1,0 +1,11 @@
+{
+	"code":0,
+	"message":"OK",
+	"data":{
+		"userId":1,
+		"name":"3333",
+		"avatar":"http://10.3.201.6:80/group1/M00/00/24/CgPJBlmWngiAbTOMAAF_u1vjFII850.png",
+		"gender":"男",
+		"address":"西安"
+	}
+}
