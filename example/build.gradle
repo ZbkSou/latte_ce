@@ -36,4 +36,7 @@ dependencies {
     compile project(':latte-ec')
 //用来替换app的
     annotationProcessor project(':latte-compiler')
+//  chrome 调试
+    compile 'com.facebook.stetho:stetho:1.3.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
 }

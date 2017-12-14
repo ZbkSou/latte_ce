@@ -57,6 +57,7 @@ public class SignUpDelegate extends LatteDelegate {
                     @Override
                     public void onSuccess(String response) {
                         LatteLogger.json("USER_PROFILE",response);
+                        SignHandler.onSignUp(response);
                     }
                 })
                 .build()
@@ -105,7 +106,7 @@ public class SignUpDelegate extends LatteDelegate {
             editSignUpPassword.setError(null);
         }
         LatteLogger.d("repassword",repassword +password);
-        if(repassword.isEmpty()||repassword.length()<6||(repassword.equals(password))){
+        if(repassword.isEmpty()||repassword.length()<6||(!repassword.equals(password))){
             editSignUpRePassword.setError("密码格式错误");
             isPass = false;
         }else {

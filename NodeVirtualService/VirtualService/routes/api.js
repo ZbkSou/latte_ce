@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/:api', function(req, res, next) {
+router.post('/:api', function(req, res, next) {
 	console.log(req.params.api);
 	var api = req.params.api;
 	var file= "json/"+api+".json";

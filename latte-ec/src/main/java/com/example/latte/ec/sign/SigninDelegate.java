@@ -37,6 +37,9 @@ public class SigninDelegate extends LatteDelegate {
     @BindView(R2.id.icon_sign_in_wechat)
     IconTextView iconSignInWechat;
 
+
+    
+
     /**
      * 校验
      */

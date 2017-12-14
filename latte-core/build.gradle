@@ -52,4 +52,7 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.31'
 //    logger
     compile 'com.orhanobut:logger:1.15'
+//    数据库依赖
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'org.greenrobot:greendao-generator:3.2.0'
 }
