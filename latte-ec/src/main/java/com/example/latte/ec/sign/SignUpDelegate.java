@@ -1,8 +1,10 @@
 package com.example.latte.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Patterns;
@@ -47,17 +49,28 @@ public class SignUpDelegate extends LatteDelegate {
     @BindView(R2.id.tv_link_sign_in)
     AppCompatTextView tvLinkSignIn;
 
+    private ISignListener mISignListener;
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof ISignListener){
+            mISignListener = (ISignListener)activity;
+        }
+    }
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp(){
         if(checkForm()){
             RestClient.builder()
                 .url("http://10.3.201.166:3000/api/user_profile")
-                .params("","")
+                .params("name",editSignUpName.getText().toString())
+                .params("email",editSignUpEmail.getText().toString())
+                .params("phone",editSignUpEmail.getText().toString())
+                .params("password",editSignUpPassword.getText().toString())
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
                         LatteLogger.json("USER_PROFILE",response);
-                        SignHandler.onSignUp(response);
+                        SignHandler.onSignUp(response,mISignListener);
                     }
                 })
                 .build()

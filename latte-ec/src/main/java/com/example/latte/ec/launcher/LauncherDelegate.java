@@ -1,5 +1,6 @@
 package com.example.latte.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -7,9 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.example.latte.app.AccountManager;
+import com.example.latte.app.IUserChecker;
 import com.example.latte.delegate.LatteDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
+import com.example.latte.ui.launcher.ILauncherListener;
+import com.example.latte.ui.launcher.OnLauncherFinishTag;
 import com.example.latte.ui.launcher.ScrollLauncherTag;
 import com.example.latte.util.storage.LattePreference;
 import com.example.latte.util.timer.BaseTimerTask;
@@ -27,7 +32,7 @@ import butterknife.OnClick;
  * Date: 2017/12/1
  * Description:
  */
-public class LauncherDelegate extends LatteDelegate implements ITimerListener{
+public class LauncherDelegate extends LatteDelegate implements ITimerListener {
 
 
     @BindView(R2.id.tv_launcher_timer)
@@ -36,19 +41,29 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener{
     private Timer mTimer = null;
     private int mCount = 5;
 
+    private ILauncherListener mILauncherListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
+    }
+
     @OnClick(R2.id.tv_launcher_timer)
-    void onClickTvTimer(){
-        if(mTimer!=null){
+    void onClickTvTimer() {
+        if (mTimer != null) {
             mTimer.cancel();
-            mTimer=null;
+            mTimer = null;
             checkIsShowScroll();
         }
     }
 
-    private void initTimer(){
+    private void initTimer() {
         mTimer = new Timer();
         final BaseTimerTask task = new BaseTimerTask(this);
-        mTimer.schedule(task,0,1000);
+        mTimer.schedule(task, 0, 1000);
     }
 
     @Override
@@ -64,11 +79,26 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener{
     /**
      * 判断是否显示滑动启动页
      */
-    private void checkIsShowScroll(){
-        if(!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())){
-            start(new LauncherScrollerDelegate(),SINGLETASK);
-        }else {
+    private void checkIsShowScroll() {
+        if (!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
+            start(new LauncherScrollerDelegate(), SINGLETASK);
+        } else {
             //检查是否登录
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSingIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 
@@ -77,13 +107,13 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener{
         getProxyActicity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(mTvTimer!=null){
-                    mTvTimer.setText(MessageFormat.format("跳过\n{0}s",mCount));
+                if (mTvTimer != null) {
+                    mTvTimer.setText(MessageFormat.format("跳过\n{0}s", mCount));
                     mCount--;
-                    if(mCount<0){
-                        if(mTimer!=null){
+                    if (mCount < 0) {
+                        if (mTimer != null) {
                             mTimer.cancel();
-                            mTimer=null;
+                            mTimer = null;
                             checkIsShowScroll();
                         }
                     }

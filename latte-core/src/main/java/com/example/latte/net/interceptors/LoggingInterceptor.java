@@ -63,7 +63,7 @@ public class LoggingInterceptor extends BaseInterceptor{
             }
             rBody = buffer.clone().readString(charset);
         }
-        Log.e(TAG,"收到响应: "+response.code()+response.message()+"耗时:"+tookMs+"s" +
+        Log.e(TAG,"收到响应: "+response.code()+response.message()+"耗时:"+tookMs+"ms" +
                 "\n请求url:" +response.request().url()+
                 "\n请求body:"+body+
                 "\n响应body:"+rBody);
