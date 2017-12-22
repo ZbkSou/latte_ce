@@ -15,5 +15,10 @@ public enum ConfigType {
 // 字体初始化项目
   ICON,
   //拦截器
-  INTERCEPTOR
+  INTERCEPTOR,
+//    wechat app id
+  WE_CHAT_APP_ID,
+  //wechat app secret
+  WE_CHAT_APP_SECRET,
+  ACTIVITY
 }

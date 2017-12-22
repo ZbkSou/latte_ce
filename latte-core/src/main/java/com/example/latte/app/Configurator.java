@@ -1,5 +1,7 @@
 package com.example.latte.app;
 
+import android.app.Activity;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -70,10 +72,14 @@ public class Configurator {
    * @param <T>
    * @return
    */
-  @SuppressWarnings("unchecked")
+
   final <T> T getConfiguration(Enum<ConfigType> key){
     checkConfiguration();
-    return (T) LATTE_CONFIGS.get(key.name());
+    final Object value = LATTE_CONFIGS.get(key);
+    if (value == null) {
+      throw new NullPointerException(key.toString() + " IS NULL");
+    }
+    return (T) LATTE_CONFIGS.get(key);
   }
 
   /**
@@ -126,6 +132,27 @@ public class Configurator {
    */
   public final  Configurator withApiHost(String host){
     LATTE_CONFIGS.put(ConfigType.API_HOST.name(),host);
+    return this;
+  }
+  /**
+   *   配置wechat app id
+   */
+  public final  Configurator withWeChatAppId(String appId){
+    LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_ID.name(),appId);
+    return this;
+  }
+  /**
+   *   配置wechat app secret
+   */
+  public final  Configurator withWeChatAppSecret(String secret){
+    LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET.name(),secret);
+    return this;
+  }
+  /**
+   *   配置wechat app secret
+   */
+  public final  Configurator withActivity(Activity activity ){
+    LATTE_CONFIGS.put(ConfigType.ACTIVITY.name(),activity);
     return this;
   }
 

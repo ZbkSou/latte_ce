@@ -27,6 +27,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener,ILau
     if(actionBar!=null){
       actionBar.hide();
     }
+    Latte.getConfigurator().withActivity(this);
   }
 
   @Override

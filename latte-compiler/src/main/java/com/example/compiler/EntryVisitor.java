@@ -36,6 +36,7 @@ public final class EntryVisitor extends SimpleAnnotationValueVisitor7<Void ,Void
     @Override
     public Void visitType(TypeMirror t, Void p) {
         mTypeMirror = t ;
+        generateJavaCode();
         return p;
     }
     private void generateJavaCode(){

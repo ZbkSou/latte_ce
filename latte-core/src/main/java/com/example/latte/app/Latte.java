@@ -3,7 +3,6 @@ package com.example.latte.app;
 import android.content.Context;
 
 import java.util.HashMap;
-import java.util.WeakHashMap;
 
 /**
  * Created by ZBK on 2017-10-30.
@@ -30,6 +29,13 @@ public final class Latte {
         getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
         return Configurator.getInstance();
     }
+    /**
+     *
+     * @return
+     */
+    public static Configurator getConfigurator(){
+        return Configurator.getInstance();
+    }
 
     /**
      * 获取配置
@@ -42,8 +48,8 @@ public final class Latte {
      * 获取配置
      * @return
      */
-    public static  Object getConfiguration(Enum e) {
-        return Configurator.getInstance().getLatteConfigs().get(e.name());
+    public static   <T> T  getConfiguration(Enum e) {
+        return (T)getConfigurator().getConfiguration(e);
     }
 
     /**
