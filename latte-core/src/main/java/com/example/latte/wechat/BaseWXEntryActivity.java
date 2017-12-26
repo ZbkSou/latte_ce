@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.latte.app.Latte;
 import com.example.latte.net.RestClient;
+import com.example.latte.net.callback.IError;
+import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.util.logger.LatteLogger;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -38,6 +40,7 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity{
             .append(code)
             .append("&grant_type=authorization_code");
         LatteLogger.d("authUrl",authUrl);
+        getAuth(authUrl.toString());
     }
 
     /**
@@ -62,9 +65,40 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity{
                         .append("&lang=")
                         .append("zh_CN");
                     LatteLogger.d("userInfoUrl", userInfoUrl.toString());
+                    getUserInfo(userInfoUrl.toString());
                 }
             })
             .build()
             .get();
+    }
+
+    /**
+     * 获取用户信息
+     * @param userInfoUrl
+     */
+    private void getUserInfo(String userInfoUrl){
+        RestClient.builder()
+            .url(userInfoUrl)
+            .success(new ISuccess() {
+                @Override
+                public void onSuccess(String response) {
+                    onSignInSuccess(response);
+                }
+            })
+            .failure(new IFailure() {
+                @Override
+                public void onFailure() {
+
+                }
+            })
+            .error(new IError() {
+                @Override
+                public void onError(int code, String msg) {
+
+                }
+            })
+            .build()
+            .get();
+
     }
 }

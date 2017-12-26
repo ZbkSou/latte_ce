@@ -7,7 +7,7 @@ import com.example.latte.delegate.LatteDelegate;
 /**
  * User: bkzhou
  * Date: 2017/12/21
- * Description:
+ * Description:微信支付结果模板
  */
 public class WXPayEntryTemplate extends ProxyActivity{
     @Override

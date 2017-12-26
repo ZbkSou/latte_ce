@@ -11,7 +11,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 /**
  * User: bkzhou
  * Date: 2017/12/22
- * Description:
+ * Description:注册微信
  */
 public class LatteWeChat {
     static final String APP_ID =  Latte.getConfiguration(ConfigType.WE_CHAT_APP_ID);
