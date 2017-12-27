@@ -27,6 +27,8 @@ public class ExampleApp extends Application {
             //添加拦截器主意拦截器顺序
             .withInterceptor(new LoggingInterceptor())
             .withInterceptor(new DebugInterceptor("index", R.raw.test))
+            .withWeChatAppId("xxx")
+            .withWeChatAppSecret("xx")
             .configure();
         //c初始化数据库
         DatabaseManger.getInstance().init(this);

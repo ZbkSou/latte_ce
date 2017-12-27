@@ -58,7 +58,7 @@ public class ExampleDelegate extends LatteDelegate {
           .get();
 
         RestClient.builder()
-          .url("/api/4/version/android/2.3.0")
+          .url("https://api.douban.com/v2/book/1220562")
 //            .params("", "")
           .success(new ISuccess() {
               @Override

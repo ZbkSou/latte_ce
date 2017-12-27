@@ -75,7 +75,7 @@ public class Configurator {
 
   final <T> T getConfiguration(Enum<ConfigType> key){
     checkConfiguration();
-    final Object value = LATTE_CONFIGS.get(key);
+    final Object value = LATTE_CONFIGS.get(key.name());
     if (value == null) {
       throw new NullPointerException(key.toString() + " IS NULL");
     }
@@ -148,9 +148,7 @@ public class Configurator {
     LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET.name(),secret);
     return this;
   }
-  /**
-   *   配置wechat app secret
-   */
+
   public final  Configurator withActivity(Activity activity ){
     LATTE_CONFIGS.put(ConfigType.ACTIVITY.name(),activity);
     return this;

@@ -1,5 +1,7 @@
 package com.example.latte.net;
 
+import android.util.Log;
+
 import com.example.latte.app.ConfigType;
 import com.example.latte.app.Latte;
 
@@ -52,6 +54,7 @@ public class RestCreator {
         private static final ArrayList<Interceptor> INTERCEPTORS = (ArrayList<Interceptor>) Latte.getConfiguration(ConfigType.INTERCEPTOR);
 
         private static OkHttpClient.Builder addInterceptor() {
+            Log.d("OkHttpClient",INTERCEPTORS.size()+"");
             if (INTERCEPTORS != null && !INTERCEPTORS.isEmpty()) {
                 for (Interceptor interceptor : INTERCEPTORS) {
                     BUILDER.addInterceptor(interceptor);

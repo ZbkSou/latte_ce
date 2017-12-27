@@ -17,6 +17,8 @@ import com.example.latte.ec.R2;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.util.logger.LatteLogger;
+import com.example.latte.wechat.LatteWeChat;
+import com.example.latte.wechat.callbacks.IWeChatSignInCallBack;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.logging.Logger;
@@ -110,6 +112,12 @@ public class SigninDelegate extends LatteDelegate {
             start(new SignUpDelegate());
 
         } else if (i == R.id.icon_sign_in_wechat) {
+            LatteWeChat.getInstance().onSignSuccess(new IWeChatSignInCallBack() {
+                @Override
+                public void onSignInSuccess(String userInfo) {
+                    LatteLogger.d(userInfo);
+                }
+            }).signIn();
         }
     }
 }

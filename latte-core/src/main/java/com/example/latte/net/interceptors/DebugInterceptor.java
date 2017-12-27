@@ -3,6 +3,7 @@ package com.example.latte.net.interceptors;
 import android.support.annotation.RawRes;
 
 import com.example.latte.util.file.FileUtil;
+import com.example.latte.util.logger.LatteLogger;
 
 import java.io.IOException;
 
