@@ -26,7 +26,8 @@ public final class Latte {
      */
     public static Configurator init(Context context) {
         //配置context
-        getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
+        Configurator.getInstance()
+            .getLatteConfigs().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
         return Configurator.getInstance();
     }
     /**

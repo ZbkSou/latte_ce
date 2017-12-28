@@ -47,7 +47,7 @@ import retrofit2.Callback;
  * .build()//完成构建
  * .get();//调用请求
  */
-public class RestClient {
+public final class RestClient {
 
     private final String URL;
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();

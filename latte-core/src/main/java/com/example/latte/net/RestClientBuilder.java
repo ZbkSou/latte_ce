@@ -41,7 +41,7 @@ import okhttp3.RequestBody;
  * .get/post/put/detele
  */
 
-public class RestClientBuilder {
+public final class RestClientBuilder {
 
     private Context mContext;
     //url

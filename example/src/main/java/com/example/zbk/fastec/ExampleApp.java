@@ -20,15 +20,15 @@ public class ExampleApp extends Application {
         super.onCreate();
         //配置core
         Latte.init(this)
-            .withApiHost("http://127.0.0.1/")
+            .withApiHost("http://10.3.201.166:3000/")
 //      加入字体图标
             .withIcon(new FontAwesomeModule())
             .withIcon(new FontEcModule())
             //添加拦截器主意拦截器顺序
             .withInterceptor(new LoggingInterceptor())
             .withInterceptor(new DebugInterceptor("index", R.raw.test))
-            .withWeChatAppId("xxx")
-            .withWeChatAppSecret("xx")
+//            .withWeChatAppId("xxx")
+//            .withWeChatAppSecret("xx")
             .configure();
         //c初始化数据库
         DatabaseManger.getInstance().init(this);
