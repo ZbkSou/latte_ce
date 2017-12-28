@@ -19,7 +19,7 @@ import okhttp3.Interceptor;
 
 public class Configurator {
   //WeakHashMap键值对在不使用的时候会回收,存储大量数据时试用
-  private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
+  private static final HashMap<Object, Object> LATTE_CONFIGS = new HashMap<>();
   //用来存储字体图标
   private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 //配置连接器
@@ -27,7 +27,7 @@ public class Configurator {
 
   private Configurator() {
     //踢出配置完成,即配置尚未完成
-    LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
+    LATTE_CONFIGS.put(ConfigType.CONFIG_READY, false);
   }
 
   //静态内部类+ getIinstance  = 完美懒汉单利
@@ -35,7 +35,7 @@ public class Configurator {
     return Holder.INSTANCE;
   }
 
-  final HashMap<String, Object> getLatteConfigs() {
+  final HashMap<Object, Object> getLatteConfigs() {
     return LATTE_CONFIGS;
   }
 
@@ -50,7 +50,7 @@ public class Configurator {
   public final void configure() {
     //统一初始化图标
     initIcons();
-    LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
+    LATTE_CONFIGS.put(ConfigType.CONFIG_READY, true);
   }
 
 
@@ -59,7 +59,7 @@ public class Configurator {
    * 检查配置完成,未完成报错
    */
   private void  checkConfiguration(){
-    final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY.name());
+    final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY);
     if(!isReady){
       throw  new RuntimeException("Configuration is not ready ,call configure!!");
     }
@@ -72,10 +72,10 @@ public class Configurator {
    * @param <T>
    * @return
    */
-
-  final <T> T getConfiguration(Enum<ConfigType> key){
+  @SuppressWarnings("unchecked")
+  final <T> T getConfiguration(Object key){
     checkConfiguration();
-    final Object value = LATTE_CONFIGS.get(key.name());
+    final Object value = LATTE_CONFIGS.get(key);
     if (value == null) {
       throw new NullPointerException(key.toString() + " IS NULL");
     }
@@ -112,7 +112,7 @@ public class Configurator {
      */
   public final Configurator withInterceptor(Interceptor interceptor){
     INTERCEPTORS.add(interceptor);
-    LATTE_CONFIGS.put(ConfigType.INTERCEPTOR.name(),INTERCEPTORS);
+    LATTE_CONFIGS.put(ConfigType.INTERCEPTOR,INTERCEPTORS);
     return this;
   }
   /**
@@ -122,7 +122,7 @@ public class Configurator {
    */
   public final Configurator withInterceptor(ArrayList<Interceptor> interceptors){
     INTERCEPTORS.addAll(interceptors);
-    LATTE_CONFIGS.put(ConfigType.INTERCEPTOR.name(),INTERCEPTORS);
+    LATTE_CONFIGS.put(ConfigType.INTERCEPTOR,INTERCEPTORS);
     return this;
   }
 
@@ -131,26 +131,26 @@ public class Configurator {
    *   配置host
    */
   public final  Configurator withApiHost(String host){
-    LATTE_CONFIGS.put(ConfigType.API_HOST.name(),host);
+    LATTE_CONFIGS.put(ConfigType.API_HOST,host);
     return this;
   }
   /**
    *   配置wechat app id
    */
   public final  Configurator withWeChatAppId(String appId){
-    LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_ID.name(),appId);
+    LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_ID,appId);
     return this;
   }
   /**
    *   配置wechat app secret
    */
   public final  Configurator withWeChatAppSecret(String secret){
-    LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET.name(),secret);
+    LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET,secret);
     return this;
   }
 
   public final  Configurator withActivity(Activity activity ){
-    LATTE_CONFIGS.put(ConfigType.ACTIVITY.name(),activity);
+    LATTE_CONFIGS.put(ConfigType.ACTIVITY,activity);
     return this;
   }
 

@@ -27,7 +27,7 @@ public final class Latte {
     public static Configurator init(Context context) {
         //配置context
         Configurator.getInstance()
-            .getLatteConfigs().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
+            .getLatteConfigs().put(ConfigType.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configurator.getInstance();
     }
     /**
@@ -42,15 +42,15 @@ public final class Latte {
      * 获取配置
      * @return
      */
-    public static HashMap<String, Object> getConfigurations() {
+    public static HashMap<Object, Object> getConfigurations() {
         return Configurator.getInstance().getLatteConfigs();
     }
     /**
      * 获取配置
      * @return
      */
-    public static   <T> T  getConfiguration(Enum e) {
-        return (T)getConfigurator().getConfiguration(e);
+    public static   <T> T  getConfiguration(Object e) {
+        return getConfigurator().getConfiguration(e);
     }
 
     /**
@@ -58,7 +58,7 @@ public final class Latte {
      * @return
      */
     public static Context getApplication() {
-        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
+        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT);
     }
 
 
