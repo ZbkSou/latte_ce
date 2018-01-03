@@ -23,6 +23,11 @@ public abstract class BaseDelegate extends SwipeBackFragment{
 
     private Unbinder mUnbinder = null;
 
+    /**
+     * 设置 view
+     * @param savedInstanceState
+     * @param rootView
+     */
     public abstract void onBindView(@Nullable Bundle savedInstanceState,View rootView);
 
     @Nullable
