@@ -1,4 +1,4 @@
-package com.example.latte.ec.main.index;
+package com.example.latte.ec.main.sort;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,13 +9,13 @@ import com.example.latte.ec.R;
 
 /**
  * User: bkzhou
- * Date: 2018/1/3
+ * Date: 2018/1/4
  * Description:
  */
-public class IndexDelegate extends BottomItemDelegate{
+public class SortDelegate  extends BottomItemDelegate {
     @Override
     public Object setLayout() {
-        return R.layout.delegate_index;
+        return R.layout.delegate_sort;
     }
 
     @Override

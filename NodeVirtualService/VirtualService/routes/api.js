@@ -5,6 +5,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.post('/:api', function(req, res, next) {
+	console.log(req);
 	console.log(req.params.api);
 	var api = req.params.api;
 	var file= "json/"+api+".json";
