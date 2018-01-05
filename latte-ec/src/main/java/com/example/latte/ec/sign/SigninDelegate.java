@@ -94,7 +94,7 @@ public class SigninDelegate extends LatteDelegate {
         if (i == R.id.btn_sign_in) {
             if (checkForm()) {
                 RestClient.builder()
-                    .url("api/user_profile")
+                    .url("user_profile")
                     .params("email", editSignInEmail.getText().toString())
                     .params("password", editSignInPassword.getText().toString())
                     .success(new ISuccess() {

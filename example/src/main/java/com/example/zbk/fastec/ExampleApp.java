@@ -20,13 +20,13 @@ public class ExampleApp extends Application {
         super.onCreate();
         //配置core
         Latte.init(this)
-            .withApiHost("http://10.3.201.166:3000/")
+            .withApiHost("http://10.3.201.166:3000/api/")
 //      加入字体图标
             .withIcon(new FontAwesomeModule())
             .withIcon(new FontEcModule())
             //添加拦截器主意拦截器顺序
             .withInterceptor(new LoggingInterceptor())
-            .withInterceptor(new DebugInterceptor("index", R.raw.test))
+            .withInterceptor(new DebugInterceptor("indexzz", R.raw.test))
 //            .withWeChatAppId("xxx")
 //            .withWeChatAppSecret("xx")
             .configure();

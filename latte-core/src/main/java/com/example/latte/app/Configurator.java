@@ -1,6 +1,7 @@
 package com.example.latte.app;
 
 import android.app.Activity;
+import android.os.Handler;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
@@ -25,9 +26,11 @@ public class Configurator {
 //配置连接器
   private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
+  private static final Handler HANDLER = new Handler();
   private Configurator() {
     //踢出配置完成,即配置尚未完成
     LATTE_CONFIGS.put(ConfigType.CONFIG_READY, false);
+    LATTE_CONFIGS.put(ConfigType.HANDLER, HANDLER);
   }
 
   //静态内部类+ getIinstance  = 完美懒汉单利

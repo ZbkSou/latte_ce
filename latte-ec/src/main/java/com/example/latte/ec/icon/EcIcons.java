@@ -9,10 +9,9 @@ import com.joanzapata.iconify.IconFontDescriptor;
 
 public enum EcIcons implements Icon {
 
-    icon_fenxiang('\ue624'),
-    icon_fanhui('\ue625'),
-    icon_guanbi('\ue626'),
-    icon_huanyihuan('\ue623');
+
+    icon_scan('\ue60a'),
+    icon_aipay('\ue67c');
 
 
     private char character;

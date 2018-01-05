@@ -20,5 +20,6 @@ public enum ConfigType {
   WE_CHAT_APP_ID,
   //wechat app secret
   WE_CHAT_APP_SECRET,
-  ACTIVITY
+  ACTIVITY,
+  HANDLER
 }
