@@ -36,7 +36,7 @@ public abstract class BottomItemDelegate extends LatteDelegate implements View.O
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
         if (i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - mExitTime) > mExitTime) {
+            if ((System.currentTimeMillis() - mExitTime) < EXIT_TIME) {
                 Toast.makeText(getContext(), "双击退出" + getString(R.string.app_name), Toast.LENGTH_SHORT).show();
                 mExitTime = System.currentTimeMillis();
             } else {
