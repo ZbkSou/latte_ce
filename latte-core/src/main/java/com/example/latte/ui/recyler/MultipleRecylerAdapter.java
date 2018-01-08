@@ -4,11 +4,18 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.latte.R;
+import com.example.latte.ui.banner.BannerCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +27,16 @@ import java.util.List;
 public class MultipleRecylerAdapter extends
   BaseMultiItemQuickAdapter<MultipleItemEntity, MultipleViewHolder>
   implements
-  BaseQuickAdapter.SpanSizeLookup {
+  BaseQuickAdapter.SpanSizeLookup,OnItemClickListener {
 
-
+    //设置图片加载策略
+    private static final RequestOptions RECYCLER_OPTIONS =
+        new RequestOptions()
+            .centerCrop()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .dontAnimate();
+    //确保初始化一次Banner，防止重复Item加载
+    private boolean mIsInitBanner = false;
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
@@ -70,14 +84,27 @@ public class MultipleRecylerAdapter extends
                 break;
             case ItemType.IMAGE:
                 imageUrl = item.getField(MultipleFields.IMAGE_URL);
-                holder.setText(R.id.img_sigle,imageUrl);
+                Glide.with(mContext)
+                    .load(imageUrl)
+                    .apply(RECYCLER_OPTIONS)
+                    .into((ImageView) holder.getView(R.id.img_sigle));
                 break;
             case ItemType.TEXT_IMAGE:
                 imageUrl =item.getField(MultipleFields.IMAGE_URL);
                 text =item.getField(MultipleFields.TEXT);
+                Glide.with(mContext)
+                    .load(imageUrl)
+                    .apply(RECYCLER_OPTIONS)
+                    .into((ImageView) holder.getView(R.id.iv_multiple));
+                holder.setText(R.id.tv_multiple,text);
                 break;
             case ItemType.BANNER:
-                bannerImages = item.getField(MultipleFields.BANNERS);
+                if (!mIsInitBanner) {
+                    bannerImages = item.getField(MultipleFields.BANNERS);
+                    final ConvenientBanner<String> convenientBanner = holder.getView(R.id.banner_recycler_item);
+                    BannerCreator.setDefault(convenientBanner, bannerImages, this);
+                    mIsInitBanner = true;
+                }
                 break;
             default:
                 break;
@@ -89,5 +116,10 @@ public class MultipleRecylerAdapter extends
     @Override
     public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
         return getData().get(position).getField(MultipleFields.SPAN_SIZE);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }
