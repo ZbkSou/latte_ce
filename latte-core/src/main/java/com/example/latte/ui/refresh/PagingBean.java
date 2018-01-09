@@ -15,14 +15,7 @@ public class PagingBean {
 //      当前已经显示数据
     private  int mCurrentCount = 0;
 
-    public int getDelayed() {
-        return mDelayed;
-    }
 
-    public PagingBean setDelayed(int mDelayed) {
-        this.mDelayed = mDelayed;
-        return this;
-    }
 
     //加载延迟
     private int mDelayed = 0;
@@ -59,6 +52,18 @@ public class PagingBean {
 
     public PagingBean setCurrentCount(int mCurrentCount) {
         this.mCurrentCount = mCurrentCount;
+        return this;
+    }
+    public int getDelayed() {
+        return mDelayed;
+    }
+
+    public PagingBean setDelayed(int mDelayed) {
+        this.mDelayed = mDelayed;
+        return this;
+    }
+    PagingBean addIndex() {
+        mPageIndex++;
         return this;
     }
 }

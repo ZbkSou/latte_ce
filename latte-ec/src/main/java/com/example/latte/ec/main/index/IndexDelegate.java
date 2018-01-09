@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -61,7 +62,8 @@ public class IndexDelegate extends BottomItemDelegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
-//        mRefreshHandler.firstPage("index");
+        initRecyclerView();
+        mRefreshHandler.firstPage("index");
     }
 
     @Override
@@ -71,21 +73,12 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = new RefreshHandler(srlIndex);
-        RestClient.builder()
-            .url("index")
-            .success(new ISuccess() {
-                @Override
-                public void onSuccess(String response) {
-                   final IndexDataConverter converter = new IndexDataConverter();
-                    converter.setJsonData(response);
-                    final ArrayList<MultipleItemEntity> list =  converter.convert();
-                    final String image_url = list.get(1).getField(MultipleFields.IMAGE_URL);
-                    LatteLogger.d(image_url);
-                }
-            })
-            .build()
-            .get();
+        mRefreshHandler = RefreshHandler.create(srlIndex,rvIndex,new IndexDataConverter());
+
+    }
+    private void initRecyclerView(){
+        final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
+        rvIndex.setLayoutManager(manager);
     }
 
 

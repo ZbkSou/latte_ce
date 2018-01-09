@@ -20,7 +20,7 @@ public class ExampleApp extends Application {
         super.onCreate();
         //配置core
         Latte.init(this)
-            .withApiHost("http://10.3.201.166:3000/api/")
+            .withApiHost("http://10.3.201.92:3000/api/")
 //      加入字体图标
             .withIcon(new FontAwesomeModule())
             .withIcon(new FontEcModule())
