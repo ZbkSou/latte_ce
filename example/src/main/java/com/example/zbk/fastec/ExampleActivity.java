@@ -1,5 +1,6 @@
 package com.example.zbk.fastec;
 
+import android.service.notification.StatusBarNotification;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import com.example.latte.ui.launcher.ILauncherListener;
 import com.example.latte.ui.launcher.OnLauncherFinishTag;
 import com.joanzapata.iconify.widget.IconTextView;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class ExampleActivity extends ProxyActivity implements ISignListener,ILauncherListener{
 
   @Override
@@ -29,6 +32,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener,ILau
       actionBar.hide();
     }
     Latte.getConfigurator().withActivity(this);
+    StatusBarCompat.translucentStatusBar(this);
   }
 
   @Override
