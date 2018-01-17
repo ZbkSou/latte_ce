@@ -25,9 +25,8 @@ public class VerticalListDataConverter extends DataConveter{
         final int size = dataArray.size();
         for (int i = 0; i < size; i++) {
             final JSONObject data = dataArray.getJSONObject(i);
-            final int Id = data.getInteger("goods_id");
-            final String goodsName = data.getString("goods_name");
-            final String goodsThumb = data.getString("goods_thumb");
+            final int Id = data.getInteger("id");
+            final String goodsName = data.getString("name");
             //获取内容
            final MultipleItemEntity entity = MultipleItemEntity.builder()
                .setField(MultipleFields.ITEM_TYPE, ItemType.VERTICAL_MENU_LIST)

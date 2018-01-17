@@ -6,4 +6,8 @@ package com.example.latte.delegate;
  * Description:具体实现 delegate
  */
 public abstract  class LatteDelegate extends PermissionCheckerDelegate{
+    @SuppressWarnings("unchecked")
+    public <T extends LatteDelegate> T getParentDelegate() {
+        return (T) getParentFragment();
+    }
 }

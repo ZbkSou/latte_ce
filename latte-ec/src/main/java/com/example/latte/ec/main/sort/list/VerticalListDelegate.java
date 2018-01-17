@@ -9,6 +9,7 @@ import android.view.View;
 import com.example.latte.delegate.LatteDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
+import com.example.latte.ec.main.sort.SortDelegate;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.ui.recyler.MultipleItemEntity;
@@ -53,7 +54,9 @@ public class VerticalListDelegate extends LatteDelegate {
                 public void onSuccess(String response) {
                     final List<MultipleItemEntity> data =
                         new VerticalListDataConverter().setJsonData(response).convert();
-
+                    final SortDelegate delegate  =getParentDelegate();
+                    final SortRecyclerAdapter adapter = new SortRecyclerAdapter(data,delegate);
+                    mRecyclerView.setAdapter(adapter);
                 }
             })
             .build()

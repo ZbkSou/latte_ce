@@ -7,6 +7,7 @@
   <android.support.v7.widget.Toolbar
     android:layout_width="match_parent"
     android:background="@android:color/holo_orange_dark"
+    android:gravity="center"
     android:layout_height="60dp">
 
     <TextView
@@ -32,15 +33,15 @@
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="1"
-      >
-    </android.support.v7.widget.ContentFrameLayout>
+      />
 
     <android.support.v7.widget.ContentFrameLayout
       android:id="@+id/sort_content_container"
       android:layout_width="0dp"
       android:layout_height="match_parent"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
       android:layout_weight="2.5"
-      >
-    </android.support.v7.widget.ContentFrameLayout>
+      />
   </android.support.v7.widget.LinearLayoutCompat>
 </android.support.v7.widget.LinearLayoutCompat>
